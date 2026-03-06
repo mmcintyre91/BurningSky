@@ -3,6 +3,22 @@
 ##
 ## Get latest from https://github.com/github/gitignore/blob/master/VisualStudio.gitignore
 
+
+/build/
+/out/
+/bin/
+.vs/
+CMakeSettings.json
+*.sln
+*.vcxproj*
+*.user
+*.pdb
+*.ilk
+*.obj
+*.log
+.DS_Store
+Thumbs.db
+
 # User-specific files
 *.rsuser
 *.suo
