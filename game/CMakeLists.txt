@@ -2,6 +2,7 @@ add_executable(BurningSkyGame
   src/main.cpp
   ../engine/src/Platform/GLFWWindow.cpp
   ../engine/src/Core/Window.cpp
+  ../engine/src/Graphics/Shader.cpp
 )
 
 target_include_directories(BurningSkyGame PRIVATE
