@@ -2,10 +2,9 @@
 
 out vec4 FragColor;
 
-uniform float u_Time;
+uniform vec4 u_Color;
 
 void main()
 {
-	float g = 0.5 + 0.5 * sin(u_Time);
-	FragColor = vec4(0.2, g, 0.9, 1.0);
+	FragColor = u_Color;
 }

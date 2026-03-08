@@ -183,5 +183,10 @@ namespace BurningSky {
 		glUniform1f(GetUniformLocation(name), value);
 	}
 
+	void Shader::SetFloat4(const std::string& name, float v0, float v1, float v2, float v3)
+	{
+		Bind();
+		glUniform4f(GetUniformLocation(name), v0, v1, v2, v3);
+	}
 
 }

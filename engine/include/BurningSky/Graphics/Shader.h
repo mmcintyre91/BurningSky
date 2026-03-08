@@ -28,6 +28,7 @@ namespace BurningSky {
 		//uniform helpers
 		void SetInt(const std::string& name, int value);
 		void SetFloat(const std::string& name, float value);
+		void SetFloat4(const std::string& name, float v0, float v1, float v2, float v3);
 
 		//expose the openGl prog ID
 		unsigned int GetRendererID() const { return m_RendererID; }

@@ -3,6 +3,10 @@ add_executable(BurningSkyGame
   ../engine/src/Platform/GLFWWindow.cpp
   ../engine/src/Core/Window.cpp
   ../engine/src/Graphics/Shader.cpp
+  ../engine/src/Graphics/VertexBuffer.cpp
+  ../engine/src/Graphics/IndexBuffer.cpp
+  ../engine/src/Graphics/VertexArray.cpp
+
 )
 
 target_include_directories(BurningSkyGame PRIVATE
