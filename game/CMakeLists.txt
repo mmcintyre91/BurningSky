@@ -6,6 +6,8 @@ add_executable(BurningSkyGame
   ../engine/src/Graphics/VertexBuffer.cpp
   ../engine/src/Graphics/IndexBuffer.cpp
   ../engine/src/Graphics/VertexArray.cpp
+  ../engine/src/Graphics/Renderer2D.cpp
+  ../engine/src/Graphics/OrthographicCamera.cpp
 
 )
 

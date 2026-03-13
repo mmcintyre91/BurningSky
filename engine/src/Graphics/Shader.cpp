@@ -7,6 +7,8 @@
 
 #include <glad/glad.h>
 
+#include <glm/gtc/type_ptr.hpp>
+
 namespace BurningSky {
 
 	//helper - read whole file into string
@@ -187,6 +189,12 @@ namespace BurningSky {
 	{
 		Bind();
 		glUniform4f(GetUniformLocation(name), v0, v1, v2, v3);
+	}
+
+	void Shader::SetMat4(const std::string& name, const glm::mat4& matrix) 
+	{
+		Bind();
+		glUniformMatrix4fv(GetUniformLocation(name), 1, GL_FALSE, glm::value_ptr(matrix));
 	}
 
 }

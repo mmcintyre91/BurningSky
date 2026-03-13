@@ -4,51 +4,30 @@
 
 #include <glad/glad.h>
 
+#include <glm/glm.hpp>
+
 #include "BurningSky/Core/Window.h"
 #include "BurningSky/Graphics/Shader.h"
 #include "BurningSky/Graphics/VertexArray.h"
 #include "BurningSky/Graphics/VertexBuffer.h"
 #include "BurningSky/Graphics/IndexBuffer.h"
+#include "BurningSky/Graphics/Renderer2D.h"
+#include "BurningSky/Graphics/OrthographicCamera.h"
 
 
 int main()
 {
 	BurningSky::WindowProps props;
 	props.Title = "Burning Sky - Test";
+    props.Width = 1280;
+    props.Height = 720;
 
 	std::unique_ptr<BurningSky::Window> window(BurningSky::Window::Create(props));
 
-	//shader files loaded from current working dir.
-	BurningSky::Shader shader(
-		"assets/shaders/simple.vert",
-		"assets/shaders/simple.frag"
-		);
+    BurningSky::Renderer2D::Init();
 
-    //quad in NDC :: 4 vertices
-    // (x,y)
-    float quadVertices[] = {
-        -0.5f, -0.5f, //bot left
-        0.5f, -0.5f, //bot right
-        0.5f, 0.5f, //top right
-        -0.5f, 0.5f //top left
-    };
-
-    //two triangles using the indices (0,1,2) and (2,3,0)
-    unsigned int quadIndices[] = {
-        0, 1, 2,
-        2, 3, 0
-    };
-
-    //create VAO and attach buffers
-    BurningSky::VertexArray vao;
-
-    auto vbo = std::make_unique<BurningSky::VertexBuffer>(quadVertices, sizeof(quadVertices));
-    vao.SetVertexBuffer(std::move(vbo));
-
-    auto ibo = std::make_unique<BurningSky::IndexBuffer>(quadIndices, 6);
-    vao.SetIndexBuffer(std::move(ibo));
-
-
+    //pixel camera: (0,0) bottom left, (width,height) top right
+    BurningSky::OrthographicCamera camera(0.0f, (float)props.Width, 0.0f, (float)props.Height);
 
     // -----------------------------
     // Main loop
@@ -63,17 +42,21 @@ int main()
         glClearColor(0.05f, 0.05f, 0.09f, 1.0f);
         glClear(GL_COLOR_BUFFER_BIT);
 
-        // Draw the triangle
-        shader.Bind();
-        shader.SetFloat4("u_Color", 0.2f, 0.8f, 0.4f, 1.0f);
+        BurningSky::Renderer2D::BeginFrame(camera);
+        
+        // Draw a 200x200 quad centered around (640,360)
+        BurningSky::Renderer2D::DrawQuad({ 640.0f, 360.0f }, { 200.0f, 200.0f }, { 0.2f, 0.8f, 0.4f, 1.0f });
 
-        vao.Bind();
+        // Draw a "pillar" on the left
+        BurningSky::Renderer2D::DrawQuad({ 150.0f, 360.0f }, { 60.0f, 400.0f }, { 0.8f, 0.2f, 0.2f, 1.0f });
 
-        glDrawElements(GL_TRIANGLES, vao.GetIndexBuffer().GetCount(), GL_UNSIGNED_INT, nullptr);
-        vao.Unbind();
+        BurningSky::Renderer2D::EndFrame();
+
+
 
         window->SwapBuffer(); // or SwapBuffers if you later standardize on that name
     }
+    BurningSky::Renderer2D::Shutdown();
 
     return 0;
 }
