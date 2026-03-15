@@ -4,6 +4,7 @@
 #include "BurningSky/Graphics/VertexBuffer.h"
 #include "BurningSky/Graphics/IndexBuffer.h"
 #include "BurningSky/Graphics/OrthographicCamera.h"
+#include "BurningSky/Graphics/Texture2D.h"
 
 #include <glad/glad.h>
 #include <glm/glm.hpp>
@@ -12,19 +13,19 @@
 namespace BurningSky {
 	std::unique_ptr<VertexArray> Renderer2D::s_QuadVAO;
 	std::unique_ptr<Shader> Renderer2D::s_ColorShader;
+    std::unique_ptr<Shader> Renderer2D::s_TextureShader;
     glm::mat4 Renderer2D::s_ViewProjection{ 1.0f };
 
 
 
 	void Renderer2D::Init() 
 	{
-        //quad in NDC :: 4 vertices
-        // (x,y)
         float quadVertices[] = {
-            -0.5f, -0.5f, //bot left
-            0.5f, -0.5f, //bot right
-            0.5f, 0.5f, //top right
-            -0.5f, 0.5f //top left
+            //  x,    y,    u,    v
+            -0.5f, -0.5f, 0.0f, 0.0f,  // bottom-left
+             0.5f, -0.5f, 1.0f, 0.0f,  // bottom-right
+             0.5f,  0.5f, 1.0f, 1.0f,  // top-right
+            -0.5f,  0.5f, 0.0f, 1.0f   // top-left
         };
 
         //two triangles using the indices (0,1,2) and (2,3,0)
@@ -50,6 +51,15 @@ namespace BurningSky {
             "assets/shaders/renderer2d_color.vert",
             "assets/shaders/renderer2d_color.frag"
         );
+
+        //load the shader used to draw textured quads (ie assets/textures)
+        s_TextureShader = std::make_unique<Shader>(
+            "assets/shaders/renderer2d_texture.vert",
+            "assets/shaders/renderer2d_texture.frag"
+        );
+
+        s_TextureShader->Bind();
+        s_TextureShader->SetInt("u_Texture", 0);
 	}
 
     void Renderer2D::Shutdown() 
@@ -59,6 +69,7 @@ namespace BurningSky {
         // - VertexBuffer/IndexBuffer destructors delete their buffers
         // - Shader destructor deletes the program
         s_ColorShader.reset();
+        s_TextureShader.reset();
         s_QuadVAO.reset();
     }
 
@@ -98,6 +109,44 @@ namespace BurningSky {
             nullptr
         );
         VertexArray::Unbind();
-
     }
+
+    void Renderer2D::DrawQuad(const glm::vec2& position, const glm::vec2& size,
+        const Texture2D& texture, const glm::vec4& tint) 
+    {
+        glm::mat4 model(1.0f);
+        model = glm::translate(model, glm::vec3(position.x, position.y, 0.0f));
+        model = glm::scale(model, glm::vec3(size.x, size.y, 1.0f));
+
+        s_TextureShader->Bind();
+        s_TextureShader->SetMat4("u_ViewProjection", s_ViewProjection);
+        s_TextureShader->SetMat4("u_Model", model);
+        s_TextureShader->SetFloat4("u_Tint", tint.r, tint.g, tint.b, tint.a);
+
+        texture.Bind(0);
+
+        //bind geometry and draw
+        s_QuadVAO->Bind();
+        glDrawElements(
+            GL_TRIANGLES,
+            s_QuadVAO->GetIndexBuffer().GetCount(),
+            GL_UNSIGNED_INT,
+            nullptr
+        );
+        VertexArray::Unbind();
+    }
+
+
+    void Renderer2D::DrawSprite(const glm::vec2& position, const Texture2D& texture,
+        const glm::vec4& tint) 
+    {
+
+        //auto size, use the textures pixel dimensions as draw size
+        DrawQuad(position,
+            { (float)texture.GetWidth(), (float)texture.GetHeight() },
+            texture,
+            tint);
+    }
+
+
 }

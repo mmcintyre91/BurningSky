@@ -65,12 +65,22 @@ namespace BurningSky {
 		//hardcoded layout: location 0, vec2 float position
 		glEnableVertexAttribArray(0);
 		glVertexAttribPointer(
-			0,
-			2,
+			0,                 //attrib location in shader
+			2,                 //vec2
 			GL_FLOAT,
 			GL_FALSE,
-			2 * sizeof(float),
-			(void*)0
+			4 * sizeof(float), //stride
+			(void*)0           //offset 
+		);
+
+		glEnableVertexAttribArray(1);
+		glVertexAttribPointer(
+			1,                 //attrib location in shader
+			2,                 //vec2
+			GL_FLOAT,
+			GL_FALSE,
+			4 * sizeof(float), //stride
+			(void*)(2 * sizeof(float))           //offset 
 		);
 
 		//clean up binds

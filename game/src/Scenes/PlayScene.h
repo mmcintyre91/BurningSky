@@ -1,6 +1,11 @@
 #pragma once
+#include <memory>
 #include "Scene.h"
 #include "BurningSky/Graphics/OrthographicCamera.h"
+#include "BurningSky/Graphics/Texture2D.h"
+
+
+
 
 namespace BurningSky {
 	class PlayScene : public Scene
@@ -11,6 +16,8 @@ namespace BurningSky {
 		SceneType OnUpdate(float dt) override;
 
 		void OnRender() override;
+
+		std::unique_ptr<BurningSky::Texture2D> m_TestTexture;
 
 	private:
 		OrthographicCamera& m_Camera;

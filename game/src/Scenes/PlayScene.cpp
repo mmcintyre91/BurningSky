@@ -1,13 +1,14 @@
 #include "PlayScene.h"
-
 #include <glad/glad.h>
 
 #include "BurningSky/Graphics/Renderer2D.h"
+
 
 namespace BurningSky {
 	PlayScene::PlayScene(OrthographicCamera& camera)
 		:m_Camera(camera)
 	{
+		m_TestTexture = std::make_unique<Texture2D>("assets/textures/test.png");
 	}
 
 	SceneType PlayScene::OnUpdate(float dt)
@@ -28,6 +29,8 @@ namespace BurningSky {
 		glClear(GL_COLOR_BUFFER_BIT);
 
 		Renderer2D::BeginFrame(m_Camera);
+
+		Renderer2D::DrawSprite({ 640.0f,360.0f }, *m_TestTexture);
 
 		// Fake player + enemy blocks for now
 		Renderer2D::DrawQuad({ 640.0f, 120.0f }, { 70.0f, 70.0f }, { 0.3f, 0.8f, 0.9f, 1.0f });

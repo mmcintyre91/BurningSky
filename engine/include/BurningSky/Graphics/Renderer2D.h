@@ -11,6 +11,7 @@ namespace BurningSky {
 	class Shader;
 	class VertexArray;
 	class OrthographicCamera;
+	class Texture2D;
 
 	class Renderer2D 
 	{
@@ -30,10 +31,17 @@ namespace BurningSky {
 		//draw a colored quad in woirld units using pixels.
 		static void DrawQuad(const glm::vec2& position, const glm::vec2& size, const glm::vec4& color);
 
+		static void DrawQuad(const glm::vec2& position, const glm::vec2& size,
+			const Texture2D& texture, const glm::vec4& tint = { 1.0f, 1.0f, 1.0f, 1.0f });
+
+		static void DrawSprite(const glm::vec2& position, const Texture2D& texture,
+			const glm::vec4& tint = { 1.0f, 1.0f, 1.0f, 1.0f });
+
 	private:
 		//owned by the renderer
 		static std::unique_ptr<VertexArray> s_QuadVAO;
 		static std::unique_ptr<Shader> s_ColorShader;
+		static std::unique_ptr<Shader> s_TextureShader;
 
 		//stored for the current scene/frame
 		static glm::mat4 s_ViewProjection;

@@ -13,10 +13,12 @@ add_executable(BurningSkyGame
   ../engine/src/Graphics/VertexArray.cpp
   ../engine/src/Graphics/Renderer2D.cpp
   ../engine/src/Graphics/OrthographicCamera.cpp
+  ../engine/src/Graphics/Texture2D.cpp
  )
 
 target_include_directories(BurningSkyGame PRIVATE
   ${CMAKE_CURRENT_LIST_DIR}/../engine/include
+  ${CMAKE_CURRENT_LIST_DIR}/../third_party/stb
 )
 
 message(STATUS "BurningSkyGame include dirs: ${CMAKE_CURRENT_LIST_DIR}/../engine/include")
