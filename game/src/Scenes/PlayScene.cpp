@@ -5,10 +5,9 @@
 
 
 namespace BurningSky {
-	PlayScene::PlayScene(OrthographicCamera& camera)
-		:m_Camera(camera)
+	PlayScene::PlayScene(OrthographicCamera& camera, TextureLibrary& textures)
+		:m_Camera(camera), m_Textures(textures)
 	{
-		m_TestTexture = std::make_unique<Texture2D>("assets/textures/test.png");
 	}
 
 	SceneType PlayScene::OnUpdate(float dt)
@@ -30,7 +29,8 @@ namespace BurningSky {
 
 		Renderer2D::BeginFrame(m_Camera);
 
-		Renderer2D::DrawSprite({ 640.0f,360.0f }, *m_TestTexture);
+		auto tex = m_Textures.Get("test");
+		Renderer2D::DrawSprite({ 640.0f,360.0f }, *tex);
 
 		// Fake player + enemy blocks for now
 		Renderer2D::DrawQuad({ 640.0f, 120.0f }, { 70.0f, 70.0f }, { 0.3f, 0.8f, 0.9f, 1.0f });

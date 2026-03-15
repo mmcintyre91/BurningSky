@@ -4,6 +4,7 @@
 #include "Scenes/Scene.h"
 #include "BurningSky/Core/Layer.h"
 #include "BurningSky/Graphics/OrthographicCamera.h"
+#include "BurningSky/Graphics/TextureLibrary.h"
 
 namespace BurningSky {
 	
@@ -25,6 +26,8 @@ namespace BurningSky {
 
 		SceneType m_CurrentType = SceneType::Title;
 		std::unique_ptr<Scene> m_CurrentScene;
+
+		TextureLibrary m_Textures;
 	};
 
 

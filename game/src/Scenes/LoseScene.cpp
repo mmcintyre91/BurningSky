@@ -5,8 +5,8 @@
 #include "BurningSky/Graphics/Renderer2D.h"
 
 namespace BurningSky {
-	LoseScene::LoseScene(OrthographicCamera& camera)
-		:m_Camera(camera)
+	LoseScene::LoseScene(OrthographicCamera& camera, TextureLibrary& textures)
+		:m_Camera(camera), m_Textures(textures)
 	{
 	}
 

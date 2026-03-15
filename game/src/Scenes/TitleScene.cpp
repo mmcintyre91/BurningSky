@@ -5,8 +5,8 @@
 #include "BurningSky/Graphics/Renderer2D.h"
 
 namespace BurningSky {
-	TitleScene::TitleScene(OrthographicCamera& camera)
-		:m_Camera(camera)
+	TitleScene::TitleScene(OrthographicCamera& camera, TextureLibrary& textures)
+		:m_Camera(camera), m_Textures(textures)
 	{
 	}
 

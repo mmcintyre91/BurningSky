@@ -14,6 +14,7 @@ add_executable(BurningSkyGame
   ../engine/src/Graphics/Renderer2D.cpp
   ../engine/src/Graphics/OrthographicCamera.cpp
   ../engine/src/Graphics/Texture2D.cpp
+  ../engine/src/Graphics/TextureLibrary.cpp
  )
 
 target_include_directories(BurningSkyGame PRIVATE
