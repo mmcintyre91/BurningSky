@@ -38,6 +38,8 @@ namespace BurningSky {
 		case Key::Space: return GLFW_KEY_SPACE;
 		case Key::Left: return GLFW_KEY_LEFT;
 		case Key::Right: return GLFW_KEY_RIGHT;
+		case Key::Up: return GLFW_KEY_UP;
+		case Key::Down: return GLFW_KEY_DOWN;
 		case Key::Escape: return GLFW_KEY_ESCAPE;
 		default: return GLFW_KEY_UNKNOWN;
 		}

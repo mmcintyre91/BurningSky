@@ -10,6 +10,8 @@ namespace BurningSky {
 		Space,
 		Left,
 		Right,
+		Up,
+		Down,
 		Escape
 	};
 }

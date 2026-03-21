@@ -79,7 +79,7 @@ namespace BurningSky {
 		switch (type) 
 		{
 			case SceneType::Title: m_CurrentScene = std::make_unique<TitleScene>(m_Camera, m_Textures); break;
-			case SceneType::Play: m_CurrentScene = std::make_unique<PlayScene>(m_Camera, m_Textures); break;
+			case SceneType::Play: m_CurrentScene = std::make_unique<PlayScene>(m_Camera, m_Textures, *m_Window); break;
 			case SceneType::Lose: m_CurrentScene = std::make_unique<LoseScene>(m_Camera, m_Textures); break;
 		}
 
