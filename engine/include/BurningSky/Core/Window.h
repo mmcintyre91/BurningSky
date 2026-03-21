@@ -24,6 +24,10 @@ namespace BurningSky
 		//true if user clicks close
 		virtual bool ShouldClose() const = 0;
 
+		//getters
+		virtual int GetWidth() const = 0;
+		virtual int GetHeight() const = 0;
+ 
 		// Gives access to the underlying platform handle (GLFWwindow* later).
 		// Returned as void* so engine headers don’t need GLFW includes.
 		virtual void* GetNativeHandle() const = 0;

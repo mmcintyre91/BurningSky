@@ -7,6 +7,7 @@ add_executable(BurningSkyGame
   ../engine/src/Platform/GLFWWindow.cpp
   ../engine/src/Core/Window.cpp
   ../engine/src/Core/Application.cpp
+  ../engine/src/Core/Input.cpp
   ../engine/src/Graphics/Shader.cpp
   ../engine/src/Graphics/VertexBuffer.cpp
   ../engine/src/Graphics/IndexBuffer.cpp

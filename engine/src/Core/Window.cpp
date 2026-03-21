@@ -5,6 +5,7 @@ namespace BurningSky{
 
 	Window* Window::Create(const WindowProps& props) 
 	{
+
 		return new GLFWWindow(props);
 	}
 

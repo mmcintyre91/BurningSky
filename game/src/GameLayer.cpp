@@ -1,9 +1,12 @@
+#include <iostream>
+
 #include "GameLayer.h"
 
 #include "Scenes/TitleScene.h"
 #include "Scenes/PlayScene.h"
 #include "Scenes/LoseScene.h"
 
+#include "BurningSky/Core/Window.h"
 #include "BurningSky/Graphics/Renderer2D.h"
 
 namespace BurningSky {
@@ -19,6 +22,7 @@ namespace BurningSky {
 		Renderer2D::Init();
 		
 		m_Textures.Load("test", "assets/textures/test.png");
+		m_Textures.Load("bg_mid", "assets/textures/bg_mid.png");
 
 		SwitchScene(SceneType::Title);
 	}
@@ -31,11 +35,25 @@ namespace BurningSky {
 		}
 
 		Renderer2D::Shutdown();
-	}
+	} 
 
 	void GameLayer::OnUpdate(float dt) 
 	{
 		if (!m_CurrentScene) return;
+
+		(void)dt;
+		static int lastW = -1, lastH = -1;
+		int w = m_Window->GetWidth();
+		int h = m_Window->GetHeight();
+
+		if (w != lastW || h != lastH)
+		{
+			std::cout << "Resize detected: " << w << " x " << h << "\n";
+			lastW = w;
+			lastH = h;
+		}
+
+
 		
 		SceneType requested = m_CurrentScene->OnUpdate(dt);
 		if (requested != m_CurrentType) 

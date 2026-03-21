@@ -32,6 +32,9 @@ namespace BurningSky {
 		glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 3);
 		glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
 
+		m_Width = props.Width;
+		m_Height = props.Height;
+
 #if defined(__APPLE__)
 		glfwWindowHint(GLFW_OPENGL_FORWARD_COMPAT, GLFW_TRUE);
 #endif // defined(__APPLE__)
@@ -68,8 +71,12 @@ namespace BurningSky {
 		//set this pointer inside the window for callbacks
 		glfwSetWindowUserPointer(m_Window, this);
 
-		glfwSetFramebufferSizeCallback(m_Window, [](GLFWwindow* window, int width, int height) {
-			glViewport(0, 0, width, height);
+		glfwSetFramebufferSizeCallback(m_Window, [](GLFWwindow* window, int width, int height) 
+			{
+				auto* self = static_cast<GLFWWindow*>(glfwGetWindowUserPointer(window));
+				self->m_Width = width;
+				self->m_Height = height;
+				glViewport(0, 0, width, height);
 			});
 	}
 

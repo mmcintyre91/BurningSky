@@ -1,7 +1,9 @@
 #include "PlayScene.h"
 #include <glad/glad.h>
+#include <iostream>
 
 #include "BurningSky/Graphics/Renderer2D.h"
+#include "BurningSky/Core/Input.h"
 
 
 namespace BurningSky {
@@ -12,6 +14,11 @@ namespace BurningSky {
 
 	SceneType PlayScene::OnUpdate(float dt)
 	{
+		if (BurningSky::Input::IsKeyDown(BurningSky::Key::A)) 
+		{
+			std::cout << "A pressed" << std::endl;
+		
+		}
 		//auto advance to "lose" after 5 seconds
 		m_Timer += dt;
 		if (m_Timer > 5.0f)
@@ -30,7 +37,10 @@ namespace BurningSky {
 		Renderer2D::BeginFrame(m_Camera);
 
 		auto tex = m_Textures.Get("test");
+		auto texB = m_Textures.Get("bg_mid");
+	
 		Renderer2D::DrawSprite({ 640.0f,360.0f }, *tex);
+		Renderer2D::DrawSprite({ 128.0f, 1280.f }, *texB);
 
 		// Fake player + enemy blocks for now
 		Renderer2D::DrawQuad({ 640.0f, 120.0f }, { 70.0f, 70.0f }, { 0.3f, 0.8f, 0.9f, 1.0f });

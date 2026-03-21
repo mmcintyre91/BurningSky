@@ -7,6 +7,9 @@ namespace BurningSky {
 	// layers are unit of behavior that the Application updates/renders each frame
 	// can be stacked (game layer, ui layer, debug layer)
 
+	class Window;
+
+
 	class Layer 
 	{
 	public:
@@ -30,9 +33,11 @@ namespace BurningSky {
 
 		const std::string& GetName() const { return m_Name; }
 		
+		void SetWindow(Window* window) { m_Window = window; }
 
 	protected:
 		std::string m_Name;
+		Window* m_Window = nullptr;
 
 	};
 

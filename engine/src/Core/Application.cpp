@@ -1,4 +1,5 @@
 #include "BurningSky/Core/Application.h"
+#include "BurningSky/Core/Input.h"
 
 #include <chrono>
 
@@ -8,6 +9,7 @@ namespace BurningSky {
 	{
 		//create the platform window thru Window class
 		m_Window.reset(Window::Create(WindowProps{}));
+		Input::SetWindow(m_Window.get());
 	}
 
 
@@ -23,6 +25,7 @@ namespace BurningSky {
 
 	void Application::PushLayer(std::unique_ptr<Layer> layer) 
 	{
+		layer->SetWindow(m_Window.get());
 		layer->OnAttach();
 		m_Layers.emplace_back(std::move(layer));
 	}
