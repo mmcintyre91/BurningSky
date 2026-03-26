@@ -17,6 +17,7 @@ namespace BurningSky {
 
 		void OnRender() override;
 
+
 		std::unique_ptr<BurningSky::Texture2D> m_TestTexture;
 
 	private:
@@ -28,11 +29,24 @@ namespace BurningSky {
 
 		Window& m_Window;
 
+		//player struct
 		struct Player {
 			glm::vec2 pos{ 640.0f, 120.0f };
 			glm::vec2 size{ 64.0f, 64.0f };
-			float speed = 450.0f; //pix per sec
+			float speed = 500.0f; //pix per sec
 		} m_Player;
+
+
+		//background var's
+		float m_ScrollSpeed = 120.0f;
+		float m_BackgroundOffsetY = 0.0f;
+
+
+		//camera var's
+		int m_LastW = 0;
+		int m_LastH = 0;
+
+
 	};
 
 }
