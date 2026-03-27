@@ -60,6 +60,11 @@ namespace BurningSky {
 
         s_TextureShader->Bind();
         s_TextureShader->SetInt("u_Texture", 0);
+
+        //transparency RGBA
+        glEnable(GL_BLEND);
+        glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+
 	}
 
     void Renderer2D::Shutdown() 

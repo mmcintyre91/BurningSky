@@ -83,12 +83,15 @@ namespace BurningSky {
 		glm::vec2 bg1Pos(w * 0.5f, h * 0.5f + m_BackgroundOffsetY);
 		glm::vec2 bg2Pos(w * 0.5f, h * 1.5f + m_BackgroundOffsetY);
 		auto bg = m_Textures.Get("bg_mid");
-
+		
 		Renderer2D::BeginFrame(m_Camera);
+
+
+		auto player = m_Textures.Get("ship");
 
 		Renderer2D::DrawQuad(bg1Pos, bgSize, *bg);
 		Renderer2D::DrawQuad(bg2Pos, bgSize, *bg);
-		Renderer2D::DrawQuad(m_Player.pos, m_Player.size, { 0.3f, 0.8f, 0.9f, 1.0f });
+		Renderer2D::DrawQuad(m_Player.pos, m_Player.size, *player);
 	
 
 		Renderer2D::EndFrame();

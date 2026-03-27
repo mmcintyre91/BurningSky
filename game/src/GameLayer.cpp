@@ -23,6 +23,7 @@ namespace BurningSky {
 		
 		m_Textures.Load("test", "assets/textures/test.png");
 		m_Textures.Load("bg_mid", "assets/textures/bg_mid.png");
+		m_Textures.Load("ship", "assets/textures/ship.png");
 
 		SwitchScene(SceneType::Title);
 	}
